@@ -1,0 +1,22 @@
+name: yoti-crystal-sdk
+version: 0.1.0
+
+authors:
+  - Jeremy Woertink <jeremywoertink@gmail.com>
+
+crystal: '>= 1.12.1'
+
+license: MIT
+
+dependencies:
+  openssl_ext:
+    github: spider-gazelle/openssl_ext
+    branch: master
+  habitat:
+    github: luckyframework/habitat
+    version: ~> 0.4.9
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 1.6.1
