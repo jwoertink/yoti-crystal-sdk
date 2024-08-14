@@ -11,7 +11,7 @@ module Yoti
 
       def create_session(payload) : Session
         endpoint = Yoti.doc_scan_api_endpoint + "/sessions?sdkId=#{Yoti.settings.client_sdk_id}"
-        Yoti::SignedRequest.new("POST", endpoint, payload) do |response|
+        Yoti::SignedRequest.new("POST", endpoint, payload).exec do |response|
           Session.from_json(response.body)
         end
       end

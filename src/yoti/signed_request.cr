@@ -10,7 +10,7 @@ module Yoti
     end
 
     def exec(&)
-      HTTP::Client.exec(@method, @url, headers, body) do |response|
+      HTTP::Client.exec(@method, @url, headers) do |response|
         yield response
       end
     end
@@ -26,7 +26,8 @@ module Yoti
 
     private def message_signature : String
       ssl = Yoti::SSL.new(self.class.private_key)
-      ssl.sign([@method, @path, base64_payload].join('&'))
+      message = [@method, @path, base64_payload].join('&')
+      ssl.sign(message)
     end
 
     private def base64_payload : String
