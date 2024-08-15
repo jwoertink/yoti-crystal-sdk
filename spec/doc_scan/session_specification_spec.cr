@@ -13,6 +13,22 @@ describe Yoti::DocScan::SessionSpecification do
               .with_auth_token("username:password")
           end
         }
+        .with_requested_checks {
+          Yoti::DocScan::SessionSpecification::RequestedCheck.build(specs_builder.builder) do |check_builder|
+            check_builder.with_type("ID_DOCUMENT_AUTHENTICITY").with_config
+          end
+          Yoti::DocScan::SessionSpecification::RequestedCheck.build(specs_builder.builder) do |check_builder|
+            check_builder.with_type("LIVENESS").with_config({liveness_type: "ZOOM", max_retries: 3})
+          end
+          Yoti::DocScan::SessionSpecification::RequestedCheck.build(specs_builder.builder) do |check_builder|
+            check_builder.with_type("ID_DOCUMENT_FACE_MATCH").with_config({manual_check: "FALLBACK"})
+          end
+        }
+        .with_requested_tasks {
+          Yoti::DocScan::SessionSpecification::RequestedTask.build(specs_builder.builder) do |task_builder|
+            task_builder.with_type("ID_DOCUMENT_TEXT_DATA_EXTRACTION").with_config({manual_check: "FALLBACK"})
+          end
+        }
         .with_sdk_config {
           Yoti::DocScan::SessionSpecification::SdkConfig.build(specs_builder.builder) do |sdk_builder|
             sdk_builder.with_allowed_capture_methods("CAMERA_AND_UPLOAD")

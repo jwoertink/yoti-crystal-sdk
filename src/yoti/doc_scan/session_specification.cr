@@ -15,7 +15,7 @@ module Yoti
       def initialize
         @io = IO::Memory.new
         @builder = JSON::Builder.new(@io)
-        @builder.indent = " "
+        @builder.indent = "  "
         @builder.start_document
         @builder.start_object
       end
@@ -49,13 +49,21 @@ module Yoti
         self
       end
 
-      def with_requested_check(&) : self
-        yield
+      def with_requested_checks(&) : self
+        @builder.field("requested_checks") do
+          @builder.array do
+            yield
+          end
+        end
         self
       end
 
-      def with_requested_task(&) : self
-        yield
+      def with_requested_tasks(&) : self
+        @builder.field("requested_tasks") do
+          @builder.array do
+            yield
+          end
+        end
         self
       end
 

@@ -15,8 +15,7 @@
   "requested_checks": [
     {
       "type": "ID_DOCUMENT_AUTHENTICITY",
-      "config": {
-      }
+      "config": {}
     },
     {
       "type": "LIVENESS",
