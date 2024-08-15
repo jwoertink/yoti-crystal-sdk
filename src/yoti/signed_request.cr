@@ -9,6 +9,14 @@ module Yoti
     def initialize(@method : String, @url : String, @payload : Yoti::DocScan::SessionSpecification)
     end
 
+    def self.post(url : String, payload : Yoti::DocScan::SessionSpecification, &block)
+      self.new("POST", url, payload, &block)
+    end
+
+    def self.get(url : String, &block)
+      self.new("GET", url, &block)
+    end
+
     def exec(&)
       HTTP::Client.exec(@method, @url, headers) do |response|
         yield response

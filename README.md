@@ -44,10 +44,12 @@ session = Yoti::DocScan::Client.new.create_session(payload)
 iframe_url = "#{Yoti.doc_scan_api_endpoint}/web/index.html?sessionID=#{session.session_id}&sessionToken=#{session.client_session_token}"
 
 # Find an existing session
-session = Yoti::DocScan::Client.new.find_session(session.client_session_token)
+session = Yoti::DocScan::Client.new.get_session(session.session_id)
+media_id = session.dig("resources", "id_documents").as_a[0].dig("document_id_photo", "media", "id").as_s
 
 # Fetch specific media content
 media = Yoti::DocScan::Client.new.get_media_content(session.session_id, media_id)
+File.write("/path/to/document.png", media.content)
 ```
 
 
