@@ -11,7 +11,7 @@ license: MIT
 dependencies:
   openssl_ext:
     github: spider-gazelle/openssl_ext
-    branch: master
+    version: ~> 2.0
   habitat:
     github: luckyframework/habitat
     version: ~> 0.4.7
