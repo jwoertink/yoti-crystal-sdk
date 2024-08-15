@@ -26,8 +26,16 @@ Yoti.configure do |config|
   config.key_file_path = ENV['YOTI_KEY_FILE_PATH']
 end
 
-payload = Yoti::DocScan::PayloadBuilder.build do |builder|
-  builder.with_client_session_token_ttl(600)
+payload = Yoti::DocScan::SessionSpecification.build do |specification|
+  specification.with_user_tracking_id("<YOUR_USER_ID>")
+    .with_requested_checks {
+      Yoti::DocScan::SessionSpecification::RequestedCheck.build(specification.builder) do |requested_check|
+        requested_check.with_type("ID_DOCUMENT_AUTHENTICITY").with_config
+      end
+      Yoti::DocScan::SessionSpecification::RequestedCheck.build(specification.builder) do |requested_check|
+        requested_check.with_type("LIVENESS").with_config({liveness_type: "ZOOM", max_retries: 3})
+      end
+    }
 end
 
 session = Yoti::DocScan::Client.new.create_session(payload)

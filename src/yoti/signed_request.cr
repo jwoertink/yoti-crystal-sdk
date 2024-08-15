@@ -6,7 +6,7 @@ module Yoti
       File.read(Yoti.settings.key_file_path)
     end
 
-    def initialize(@method : String, @url : String, @payload)
+    def initialize(@method : String, @url : String, @payload : Yoti::DocScan::SessionSpecification)
     end
 
     def exec(&)

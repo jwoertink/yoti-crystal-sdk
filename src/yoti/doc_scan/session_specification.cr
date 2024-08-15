@@ -9,6 +9,7 @@ module Yoti
       end
 
       delegate to_s, to: @io
+      delegate to_json, to: @builder
 
       getter builder : JSON::Builder
 
