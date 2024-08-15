@@ -43,7 +43,26 @@ module Yoti
       def with_notifications(&) : self
         @builder.field("notifications") do
           @builder.object do
-            yield @builder
+            yield
+          end
+        end
+        self
+      end
+
+      def with_requested_check(&) : self
+        yield
+        self
+      end
+
+      def with_requested_task(&) : self
+        yield
+        self
+      end
+
+      def with_sdk_config(&) : self
+        @builder.field("sdk_config") do
+          @builder.object do
+            yield
           end
         end
         self

@@ -13,24 +13,24 @@
     "auth_token": "username:password"
   },
   "requested_checks": [
-	{
- 		"type": "ID_DOCUMENT_AUTHENTICITY",
-		"config": {
-		}
-	},
-	{
-		"type": "LIVENESS",
-		"config": {
-			"liveness_type": "ZOOM",
-			"max_retries": 3
-		}
-	},
-	{
-		"type": "ID_DOCUMENT_FACE_MATCH",
-		"config": {
-			"manual_check": "FALLBACK"
-		}
-	}
+    {
+      "type": "ID_DOCUMENT_AUTHENTICITY",
+      "config": {
+      }
+    },
+    {
+      "type": "LIVENESS",
+      "config": {
+        "liveness_type": "ZOOM",
+        "max_retries": 3
+      }
+    },
+    {
+      "type": "ID_DOCUMENT_FACE_MATCH",
+      "config": {
+        "manual_check": "FALLBACK"
+      }
+    }
   ],
   "requested_tasks": [
     {
