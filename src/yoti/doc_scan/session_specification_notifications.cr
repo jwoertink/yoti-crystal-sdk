@@ -32,6 +32,16 @@ module Yoti
           @builder.field("auth_token", basic_auth_string)
           self
         end
+
+        def with_auth_type_basic : self
+          @builder.field("auth_type", "BASIC")
+          self
+        end
+
+        def with_auth_type_bearer : self
+          @builder.field("auth_type", "BEARER")
+          self
+        end
       end
     end
   end

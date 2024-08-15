@@ -11,6 +11,7 @@ describe Yoti::DocScan::SessionSpecification do
             notification_builder.with_endpoint("https://yourdomain.example/idverify/updates")
               .with_topics(["resource_update", "task_completion", "check_completion", "session_completion"])
               .with_auth_token("username:password")
+              .with_auth_type_basic
           end
         }
         .with_requested_checks {

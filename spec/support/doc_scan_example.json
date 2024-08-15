@@ -10,7 +10,8 @@
       "check_completion",
       "session_completion"
     ],
-    "auth_token": "username:password"
+    "auth_token": "username:password",
+    "auth_type": "BASIC"
   },
   "requested_checks": [
     {
