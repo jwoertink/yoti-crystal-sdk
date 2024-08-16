@@ -9,9 +9,9 @@ module Yoti
       end
 
       delegate to_s, to: @io
-      delegate to_json, to: @builder
 
       getter builder : JSON::Builder
+      getter? document_closed : Bool = false
 
       def initialize
         @io = IO::Memory.new
@@ -22,8 +22,17 @@ module Yoti
       end
 
       def close : Nil
+        @document_closed = true
         @builder.end_object
         @builder.end_document
+      end
+
+      def to_json : String
+        if document_closed?
+          @io.to_s
+        else
+          raise "Called #to_json on SessionSpecification before the JSON document was closed. Be sure to call #close first."
+        end
       end
 
       def with_client_session_token_ttl(ttl_seconds : Int32) : self
