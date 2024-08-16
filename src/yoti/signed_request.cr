@@ -9,12 +9,12 @@ module Yoti
     def initialize(@method : String, @url : String, @payload : Yoti::DocScan::SessionSpecification)
     end
 
-    def self.post(url : String, payload : Yoti::DocScan::SessionSpecification, &block)
-      self.new("POST", url, payload, &block)
+    def self.post(url : String, payload : Yoti::DocScan::SessionSpecification, &block : HTTP::Client::Response -> _)
+      self.new("POST", url, payload).exec(&block)
     end
 
-    def self.get(url : String, &block)
-      self.new("GET", url, &block)
+    def self.get(url : String, &block : HTTP::Client::Response -> _)
+      self.new("GET", url).exec(&block)
     end
 
     def exec(&)
