@@ -34,7 +34,7 @@ module Yoti
 
     private def message_signature : String
       ssl = Yoti::SSL.new(self.class.private_key)
-      message = [@method, @path, base64_payload].join('&')
+      message = [@method, @url, base64_payload].join('&')
       ssl.sign(message)
     end
 
