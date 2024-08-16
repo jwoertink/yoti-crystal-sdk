@@ -35,6 +35,16 @@ module Yoti
           @builder.field("error_url", error_url)
           self
         end
+
+        def with_locale(locale : String) : self
+          @builder.field("locale", locale)
+          self
+        end
+
+        def with_allow_handoff : self
+          @builder.field("allow_handoff", true)
+          self
+        end
       end
     end
   end
