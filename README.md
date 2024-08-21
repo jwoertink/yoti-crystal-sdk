@@ -38,13 +38,21 @@ payload = Yoti::DocScan::SessionSpecification.build do |specification|
     }
 end
 
-session = Yoti::DocScan::Client.new.create_session(payload)
+response = Yoti::DocScan::Client.new.create_session(payload)
+
+if error = response.error
+  # Yoti::Errors::ErrorResponse
+  puts error.message
+end
+
+session = Yoti::DocScan::Client::Session.from_json(response.body)
 
 # Render the form
 iframe_url = "#{Yoti.doc_scan_api_endpoint}/web/index.html?sessionID=#{session.session_id}&sessionToken=#{session.client_session_token}"
 
 # Find an existing session
-session = Yoti::DocScan::Client.new.get_session(session.session_id)
+response = Yoti::DocScan::Client.new.get_session(session.session_id)
+session = JSON.parse(response.body)
 media_id = session.dig("resources", "id_documents").as_a[0].dig("document_id_photo", "media", "id").as_s
 
 # Fetch specific media content
