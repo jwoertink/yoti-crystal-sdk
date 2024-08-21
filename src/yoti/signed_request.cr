@@ -54,7 +54,7 @@ module Yoti
     end
 
     private def base64_payload(data) : String
-      Base64.encode(data.to_json)
+      Base64.strict_encode(data.to_json)
     end
   end
 end
