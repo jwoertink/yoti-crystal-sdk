@@ -21,7 +21,7 @@ module Yoti
     end
 
     def exec(&)
-      HTTP::Client.exec(@method, url_for(@path), headers) do |response|
+      HTTP::Client.exec(@method, url_for(@path), headers, @payload.try(&.to_json)) do |response|
         yield response
       end
     end
