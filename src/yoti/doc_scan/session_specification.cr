@@ -40,6 +40,12 @@ module Yoti
         self
       end
 
+      # NOTE: If `client_session_token_ttl` is called, this field can't be used
+      def with_session_deadline(time : Time) : self
+        @builder.field("session_deadline", time.to_rfc3339)
+        self
+      end
+
       def with_resources_ttl(ttl_seconds : Int32) : self
         @builder.field("resources_ttl", ttl_seconds)
         self

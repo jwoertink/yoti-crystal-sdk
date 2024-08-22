@@ -21,6 +21,16 @@ module Yoti
           self
         end
 
+        def with_secondary_colour(hex_color_value : String) : self
+          @builder.field("secondary_colour", hex_color_value)
+          self
+        end
+
+        def with_font_colour(hex_color_value : String) : self
+          @builder.field("font_colour", hex_color_value)
+          self
+        end
+
         def with_preset_issuing_country(iso3_country : String) : self
           @builder.field("preset_issuing_country", iso3_country)
           self
@@ -43,6 +53,11 @@ module Yoti
 
         def with_allow_handoff : self
           @builder.field("allow_handoff", true)
+          self
+        end
+
+        def with_privacy_policy_url(url : String) : self
+          @builder.field("privacy_policy_url", url)
           self
         end
       end
