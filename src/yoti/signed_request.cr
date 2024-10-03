@@ -8,8 +8,8 @@ module Yoti
 
     @path : String
 
-    def initialize(@method : String, endpoint : String, @payload : Yoti::DocScan::SessionSpecification? = nil)
-      @path = "/#{endpoint}?sdkId=#{Yoti.settings.client_sdk_id}&nonce=#{UUID.random}&timestamp=#{Time.utc.to_unix}"
+    def initialize(@method : String, endpoint : String, @payload : Yoti::DocScan::SessionSpecification? = nil, nonce : UUID? = UUID.random, timestamp : Int64? = Time.utc.to_unix)
+      @path = "/#{endpoint}?sdkId=#{Yoti.settings.client_sdk_id}&nonce=#{nonce}&timestamp=#{timestamp}"
     end
 
     def self.post(endpoint : String, payload : Yoti::DocScan::SessionSpecification, &block : HTTP::Client::Response -> _)
